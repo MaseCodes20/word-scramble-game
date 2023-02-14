@@ -31,6 +31,7 @@ function Game() {
   const newGame = () => {
     setCorrectWord("");
     setScambledWord("");
+    setWordInput("");
 
     const word = randomWord();
     setCorrectWord(word);
@@ -50,10 +51,8 @@ function Game() {
         <div className="flex items-center justify-center gap-4">
           {correctWord.split("").map((letter, index) => {
             return (
-              <div
-                key={`${letter}_${indexedDB}`}
-                className="w-10 h-20 bg-gray-300"
-              >
+              <div key={`${letter}_${index}`} className="w-10 h-20 bg-gray-300">
+                {" "}
                 {wordInput[index]}
               </div>
             );
@@ -62,9 +61,20 @@ function Game() {
 
         {/* Scrambled Word */}
         <div className="text-center my-5 text-2xl">{scrambledWord}</div>
-        {/* word input */}
 
-        <button onClick={newGame}>Click</button>
+        {/* word input */}
+        <div>
+          <input
+            type="text"
+            name="wordInput"
+            id="wordInput"
+            className="border-2 border-black"
+            onChange={(e) => setWordInput(e.target.value)}
+          />
+          <button>Check</button>
+        </div>
+
+        <button onClick={newGame}>New Game</button>
       </div>
     </div>
   );
