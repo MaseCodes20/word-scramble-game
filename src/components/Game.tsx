@@ -61,6 +61,7 @@ function Game() {
         </div>
 
         {/* Scrambled Word */}
+        <div className="text-center my-5 text-2xl">{scrambledWord}</div>
         {/* word input */}
 
         <button onClick={newGame}>Click</button>
