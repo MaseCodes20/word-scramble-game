@@ -1,7 +1,9 @@
+import Game from "./components/Game";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Word scramble game</h1>
+    <div className="flex items-center justify-center min-h-screen">
+      <Game />
     </div>
   );
 }
