@@ -14,16 +14,30 @@ function Game() {
     return words[randomIndex];
   };
 
+  const scrambleWord = (word: string) => {
+    const scrambledWord = word.split("").reduce(
+      (newArray, _, i) => {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+
+        return newArray;
+      },
+      [...word]
+    );
+
+    return scrambledWord.join("");
+  };
+
   const newGame = () => {
     setCorrectWord("");
     setScambledWord("");
 
     const word = randomWord();
     setCorrectWord(word);
-    // console.log(word);
+    setScambledWord(scrambleWord(word));
   };
 
-  console.log(correctWord);
+  console.log(scrambledWord);
 
   return (
     <div className="border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
@@ -33,7 +47,7 @@ function Game() {
 
       <div>
         {/* Empty letters box */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-4">
           {correctWord.split("").map((letter, index) => {
             return (
               <div
