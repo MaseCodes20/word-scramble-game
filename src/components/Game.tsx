@@ -6,7 +6,7 @@ function Game() {
   const [scrambledWord, setScambledWord] = useState("");
   const [wordInput, setWordInput] = useState("");
   const [message, setMessage] = useState("");
-  const [] = useState();
+  const [gameStarted, setGameStarted] = useState(false);
 
   const randomWord = () => {
     const words = scrambleGame.words;
@@ -38,6 +38,7 @@ function Game() {
     setCorrectWord("");
     setScambledWord("");
     setWordInput("");
+    setGameStarted(true);
 
     const word = randomWord();
     setCorrectWord(word);
@@ -50,36 +51,49 @@ function Game() {
         <h1>Word Scramble game</h1>
       </div>
 
-      <div>
-        {/* Empty letters box */}
-        <div className="flex items-center justify-center gap-4">
-          {correctWord.split("").map((letter, index) => {
-            return (
-              <div key={`${letter}_${index}`} className="w-10 h-20 bg-gray-300">
-                {" "}
-                {wordInput[index]}
-              </div>
-            );
-          })}
+      {!gameStarted ? (
+        <div className="h-[400px] flex items-center justify-center">
+          <button onClick={newGame}>Start Game</button>
         </div>
+      ) : (
+        <>
+          <div className="h-[380px]">
+            {/* Empty letters box */}
+            <div className="flex items-center justify-center gap-4">
+              {correctWord.split("").map((letter, index) => {
+                return (
+                  <div
+                    key={`${letter}_${index}`}
+                    className="w-10 h-20 bg-gray-300 flex items-center justify-center text-xl font-bold"
+                  >
+                    {" "}
+                    {wordInput[index]}
+                  </div>
+                );
+              })}
+            </div>
 
-        {/* Scrambled Word */}
-        <div className="text-center my-5 text-2xl">{scrambledWord}</div>
+            {/* Scrambled Word */}
+            <div className="text-center my-5 text-2xl">
+              {scrambledWord.toLowerCase()}
+            </div>
 
-        {/* word input */}
-        <div>
-          <input
-            type="text"
-            name="wordInput"
-            id="wordInput"
-            className="border-2 border-black"
-            onChange={(e) => setWordInput(e.target.value)}
-          />
-          <button onClick={checkWord}>Check</button>
-        </div>
-
-        <button onClick={newGame}>New Game</button>
-      </div>
+            {/* word input */}
+            <div>
+              <input
+                type="text"
+                name="wordInput"
+                id="wordInput"
+                className="border-2 border-black"
+                value={wordInput}
+                onChange={(e) => setWordInput(e.target.value)}
+              />
+              <button onClick={checkWord}>Check</button>
+            </div>
+          </div>
+          <button onClick={newGame}>New Game</button>
+        </>
+      )}
     </div>
   );
 }
