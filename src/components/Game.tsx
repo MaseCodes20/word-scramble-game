@@ -5,7 +5,7 @@ function Game() {
   const [correctWord, setCorrectWord] = useState("");
   const [scrambledWord, setScambledWord] = useState("");
   const [wordInput, setWordInput] = useState("");
-  const [] = useState();
+  const [message, setMessage] = useState("");
   const [] = useState();
 
   const randomWord = () => {
@@ -28,6 +28,12 @@ function Game() {
     return scrambledWord.join("");
   };
 
+  const checkWord = () => {
+    correctWord.toLowerCase() === wordInput.toLowerCase()
+      ? setMessage("Correct Answer")
+      : setMessage("Wrong Answer");
+  };
+
   const newGame = () => {
     setCorrectWord("");
     setScambledWord("");
@@ -37,8 +43,6 @@ function Game() {
     setCorrectWord(word);
     setScambledWord(scrambleWord(word));
   };
-
-  console.log(scrambledWord);
 
   return (
     <div className="border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
@@ -71,7 +75,7 @@ function Game() {
             className="border-2 border-black"
             onChange={(e) => setWordInput(e.target.value)}
           />
-          <button>Check</button>
+          <button onClick={checkWord}>Check</button>
         </div>
 
         <button onClick={newGame}>New Game</button>
