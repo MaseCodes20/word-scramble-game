@@ -53,45 +53,60 @@ function Game() {
 
       {!gameStarted ? (
         <div className="h-[400px] flex items-center justify-center">
-          <button onClick={newGame}>Start Game</button>
+          <button
+            onClick={newGame}
+            className="p-2 bg-yellow-300 hover:bg-yellow-500 hover:text-white rounded-md font-semibold"
+          >
+            Start Game
+          </button>
         </div>
       ) : (
         <>
-          <div className="h-[380px]">
-            {/* Empty letters box */}
-            <div className="flex items-center justify-center gap-4">
-              {correctWord.split("").map((letter, index) => {
-                return (
-                  <div
-                    key={`${letter}_${index}`}
-                    className="w-10 h-20 bg-gray-300 flex items-center justify-center text-xl font-bold"
-                  >
-                    {" "}
-                    {wordInput[index]}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Scrambled Word */}
-            <div className="text-center my-5 text-2xl">
-              {scrambledWord.toLowerCase()}
-            </div>
-
-            {/* word input */}
+          <div className="h-[380px] flex items-center justify-center">
             <div>
-              <input
-                type="text"
-                name="wordInput"
-                id="wordInput"
-                className="border-2 border-black"
-                value={wordInput}
-                onChange={(e) => setWordInput(e.target.value)}
-              />
-              <button onClick={checkWord}>Check</button>
+              {/* Empty letters box */}
+              <div className="flex items-center justify-center gap-4">
+                {correctWord.split("").map((letter, index) => {
+                  return (
+                    <div
+                      key={`${letter}_${index}`}
+                      className="w-[30px] h-[60px] rounded-md bg-gray-300 flex items-center justify-center text-xl font-bold"
+                    >
+                      {" "}
+                      {wordInput[index]}
+                    </div>
+                  );
+                })}
+              </div>
+              {/* Scrambled Word */}
+              <div className="text-center my-10 text-2xl">
+                {scrambledWord.toLowerCase()}
+              </div>
+              {/* word input */}
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  name="wordInput"
+                  id="wordInput"
+                  className="flex-1 border-2 border-black rounded-md p-2"
+                  value={wordInput}
+                  onChange={(e) => setWordInput(e.target.value)}
+                />
+                <button
+                  className="ml-3 p-2 bg-green-300 hover:bg-green-500 hover:text-white rounded-md font-semibold"
+                  onClick={checkWord}
+                >
+                  Check
+                </button>
+              </div>{" "}
             </div>
           </div>
-          <button onClick={newGame}>New Game</button>
+          <button
+            onClick={newGame}
+            className="p-2 bg-yellow-300 hover:bg-yellow-500 hover:text-white rounded-md font-semibold"
+          >
+            New Game
+          </button>
         </>
       )}
     </div>
