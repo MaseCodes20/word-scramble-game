@@ -1,5 +1,8 @@
 import { useState } from "react";
 import scrambleGame from "../words.json";
+import GameButton from "./GameButton";
+
+const GAME_TITLE = "Word Scramble Game";
 
 function Game() {
   const [correctWord, setCorrectWord] = useState("");
@@ -29,6 +32,8 @@ function Game() {
   };
 
   const checkWord = () => {
+    if (wordInput === "") return;
+
     correctWord.toLowerCase() === wordInput.toLowerCase()
       ? setMessage("Correct Answer")
       : setMessage("Wrong Answer");
@@ -39,6 +44,7 @@ function Game() {
     setScambledWord("");
     setWordInput("");
     setGameStarted(true);
+    setMessage("");
 
     const word = randomWord();
     setCorrectWord(word);
@@ -48,17 +54,12 @@ function Game() {
   return (
     <div className="border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
       <div className="text-center mb-3">
-        <h1>Word Scramble game</h1>
+        <h1 className="font-bold text-2xl">{GAME_TITLE}</h1>
       </div>
 
       {!gameStarted ? (
         <div className="h-[400px] flex items-center justify-center">
-          <button
-            onClick={newGame}
-            className="p-2 bg-yellow-300 hover:bg-yellow-500 hover:text-white rounded-md font-semibold"
-          >
-            Start Game
-          </button>
+          <GameButton newGame={newGame} text="Start Game" />
         </div>
       ) : (
         <>
@@ -72,7 +73,6 @@ function Game() {
                       key={`${letter}_${index}`}
                       className="w-[30px] h-[60px] rounded-md bg-gray-300 flex items-center justify-center text-xl font-bold"
                     >
-                      {" "}
                       {wordInput[index]}
                     </div>
                   );
@@ -98,15 +98,10 @@ function Game() {
                 >
                   Check
                 </button>
-              </div>{" "}
+              </div>
             </div>
           </div>
-          <button
-            onClick={newGame}
-            className="p-2 bg-yellow-300 hover:bg-yellow-500 hover:text-white rounded-md font-semibold"
-          >
-            New Game
-          </button>
+          <GameButton newGame={newGame} text="New Game" />
         </>
       )}
     </div>
