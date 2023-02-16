@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IGameButton {
   newGame: () => void;
   text: string;

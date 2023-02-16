@@ -1,6 +1,7 @@
 import { useState } from "react";
 import scrambleGame from "../words.json";
 import GameButton from "./GameButton";
+import GameLetterBoxes from "./GameLetterBoxes";
 
 const GAME_TITLE = "Word Scramble Game";
 
@@ -66,18 +67,10 @@ function Game() {
           <div className="h-[380px] flex items-center justify-center">
             <div>
               {/* Empty letters box */}
-              <div className="flex items-center justify-center gap-4">
-                {correctWord.split("").map((letter, index) => {
-                  return (
-                    <div
-                      key={`${letter}_${index}`}
-                      className="w-[30px] h-[60px] rounded-md bg-gray-300 flex items-center justify-center text-xl font-bold"
-                    >
-                      {wordInput[index]}
-                    </div>
-                  );
-                })}
-              </div>
+              <GameLetterBoxes
+                correctWord={correctWord}
+                wordInput={wordInput}
+              />
               {/* Scrambled Word */}
               <div className="text-center my-10 text-2xl">
                 {scrambledWord.toLowerCase()}
