@@ -1,7 +1,8 @@
 import { useState } from "react";
 import scrambleGame from "../words.json";
-import GameButton from "./GameButton";
+import GameButton, { ButtonType } from "./GameButton";
 import GameLetterBoxes from "./GameLetterBoxes";
+import WordInput from "./WordInput";
 
 const GAME_TITLE = "Word Scramble Game";
 
@@ -60,7 +61,11 @@ function Game() {
 
       {!gameStarted ? (
         <div className="h-[400px] flex items-center justify-center">
-          <GameButton newGame={newGame} text="Start Game" />
+          <GameButton
+            clickFunction={newGame}
+            text="Start Game"
+            buttonType={ButtonType.Game}
+          />
         </div>
       ) : (
         <>
@@ -76,25 +81,18 @@ function Game() {
                 {scrambledWord.toLowerCase()}
               </div>
               {/* word input */}
-              <div className="flex items-center">
-                <input
-                  type="text"
-                  name="wordInput"
-                  id="wordInput"
-                  className="flex-1 border-2 border-black rounded-md p-2"
-                  value={wordInput}
-                  onChange={(e) => setWordInput(e.target.value)}
-                />
-                <button
-                  className="ml-3 p-2 bg-green-300 hover:bg-green-500 hover:text-white rounded-md font-semibold"
-                  onClick={checkWord}
-                >
-                  Check
-                </button>
-              </div>
+              <WordInput
+                wordInput={wordInput}
+                setWord={setWordInput}
+                clickFunction={checkWord}
+              />
             </div>
           </div>
-          <GameButton newGame={newGame} text="New Game" />
+          <GameButton
+            clickFunction={newGame}
+            text="New Game"
+            buttonType={ButtonType.Game}
+          />
         </>
       )}
     </div>

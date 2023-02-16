@@ -1,14 +1,17 @@
-interface IGameButton {
-  newGame: () => void;
-  text: string;
+export enum ButtonType {
+  Game = "gameButton",
+  Check = "checkButton",
 }
 
-function GameButton({ newGame, text }: IGameButton) {
+interface IGameButton {
+  clickFunction: () => void;
+  text: string;
+  buttonType: ButtonType;
+}
+
+function GameButton({ clickFunction, text, buttonType }: IGameButton) {
   return (
-    <button
-      onClick={newGame}
-      className="p-2 bg-yellow-300 hover:bg-yellow-500 hover:text-white rounded-md font-semibold"
-    >
+    <button onClick={clickFunction} className={buttonType}>
       {text}
     </button>
   );
