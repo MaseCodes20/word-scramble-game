@@ -64,11 +64,12 @@ function Game() {
     if (message) {
       setIsOpen(true);
       setTimeout(() => {
+        if (message === "Correct Answer") newGame();
         setMessage("");
         setIsOpen(false);
       }, 3000);
     }
-  }, [message]);
+  }, [message, setIsOpen, setTimeout, setMessage, newGame]);
 
   return (
     <div className="relative border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
@@ -92,6 +93,7 @@ function Game() {
               <GameLetterBoxes
                 correctWord={correctWord}
                 wordInput={wordInput}
+                isWrongAnswer={isWrongAnswer}
               />
               {/* Scrambled Word */}
               <div className="text-center my-10 text-2xl">
