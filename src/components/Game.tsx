@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import scrambleGame from "../words.json";
 import GameButton, { ButtonType } from "./GameButton";
 import GameLetterBoxes from "./GameLetterBoxes";
+import MessageModal from "./MessageModal";
 import WordInput from "./WordInput";
 
 const GAME_TITLE = "Word Scramble Game";
@@ -11,6 +12,8 @@ function Game() {
   const [scrambledWord, setScambledWord] = useState("");
   const [wordInput, setWordInput] = useState("");
   const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [isWrongAnswer, setIsWrongAnswer] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
   const randomWord = () => {
@@ -36,9 +39,13 @@ function Game() {
   const checkWord = () => {
     if (wordInput === "") return;
 
-    correctWord.toLowerCase() === wordInput.toLowerCase()
-      ? setMessage("Correct Answer")
-      : setMessage("Wrong Answer");
+    if (correctWord.toLowerCase() === wordInput.toLowerCase()) {
+      setMessage("Correct Answer");
+      setIsWrongAnswer(false);
+    } else {
+      setMessage("Wrong Answer");
+      setIsWrongAnswer(true);
+    }
   };
 
   const newGame = () => {
@@ -53,8 +60,18 @@ function Game() {
     setScambledWord(scrambleWord(word));
   };
 
+  useEffect(() => {
+    if (message) {
+      setIsOpen(true);
+      setTimeout(() => {
+        setMessage("");
+        setIsOpen(false);
+      }, 3000);
+    }
+  }, [message]);
+
   return (
-    <div className="border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
+    <div className="relative border-2 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
       <div className="text-center mb-3">
         <h1 className="font-bold text-2xl">{GAME_TITLE}</h1>
       </div>
@@ -95,6 +112,8 @@ function Game() {
           />
         </>
       )}
+
+      <MessageModal setIsOpen={setIsOpen} isOpen={isOpen} message={message} />
     </div>
   );
 }

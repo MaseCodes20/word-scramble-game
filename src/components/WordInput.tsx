@@ -1,6 +1,6 @@
 interface IWordInput {
   wordInput: string;
-  setWord: (e: string) => void;
+  setWord: (word: string) => void;
   clickFunction: () => void;
 }
 
