@@ -103,7 +103,7 @@ function Game() {
               <WordInput
                 wordInput={wordInput}
                 setWord={setWordInput}
-                clickFunction={checkWord}
+                checkWord={checkWord}
               />
             </div>
           </div>

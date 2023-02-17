@@ -4,7 +4,7 @@ export enum ButtonType {
 }
 
 interface IGameButton {
-  clickFunction: () => void;
+  clickFunction?: () => void;
   text: string;
   buttonType: ButtonType;
 }

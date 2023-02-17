@@ -1,14 +1,21 @@
+import { FormEvent } from "react";
 import GameButton, { ButtonType } from "./GameButton";
 
 interface IWordInput {
   wordInput: string;
   setWord: (word: string) => void;
-  clickFunction: () => void;
+  checkWord: () => void;
 }
 
-function WordInput({ wordInput, setWord, clickFunction }: IWordInput) {
+function WordInput({ wordInput, setWord, checkWord }: IWordInput) {
+  const submitForm = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    checkWord();
+  };
+
   return (
-    <div className="flex items-center">
+    <form onSubmit={submitForm} className="flex items-center">
       <input
         type="text"
         name="wordInput"
@@ -17,12 +24,8 @@ function WordInput({ wordInput, setWord, clickFunction }: IWordInput) {
         value={wordInput}
         onChange={(e) => setWord(e.target.value)}
       />
-      <GameButton
-        buttonType={ButtonType.Check}
-        text="Check"
-        clickFunction={clickFunction}
-      />
-    </div>
+      <GameButton buttonType={ButtonType.Check} text="Check" />
+    </form>
   );
 }
 
