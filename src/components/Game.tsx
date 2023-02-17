@@ -72,7 +72,7 @@ function Game() {
   }, [message, setIsOpen, setTimeout, setMessage, newGame]);
 
   return (
-    <div className="relative border-2 bg-white/10 border-black rounded-md min-h-[500px] w-[500px] p-3 shadow-md">
+    <div className="relative border-2 bg-white/10 border-black rounded-md min-h-[500px] min-w-[300px] max-w-[500px] p-3 shadow-md">
       <div className="text-center mb-3">
         <h1 className="font-bold text-2xl">{GAME_TITLE}</h1>
       </div>
