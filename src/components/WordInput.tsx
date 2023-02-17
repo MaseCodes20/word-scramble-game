@@ -1,3 +1,5 @@
+import GameButton, { ButtonType } from "./GameButton";
+
 interface IWordInput {
   wordInput: string;
   setWord: (word: string) => void;
@@ -11,16 +13,15 @@ function WordInput({ wordInput, setWord, clickFunction }: IWordInput) {
         type="text"
         name="wordInput"
         id="wordInput"
-        className="flex-1 border-2 border-black rounded-md p-2"
+        className="flex-1 border-2 text-black border-black rounded-md p-2"
         value={wordInput}
         onChange={(e) => setWord(e.target.value)}
       />
-      <button
-        className="ml-3 p-2 bg-green-300 hover:bg-green-500 hover:text-white rounded-md font-semibold"
-        onClick={clickFunction}
-      >
-        Check
-      </button>
+      <GameButton
+        buttonType={ButtonType.Check}
+        text="Check"
+        clickFunction={clickFunction}
+      />
     </div>
   );
 }

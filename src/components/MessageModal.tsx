@@ -23,7 +23,7 @@ function MessageModal({ message, isOpen, setIsOpen }: IMessageModal) {
           className="absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center h-full w-full bg-gray-700/20"
           onClick={closeModal}
         >
-          <div className="bg-white rounded-md p-4">
+          <div className="bg-white text-black rounded-md p-4">
             <p>{message}</p>
           </div>
         </div>

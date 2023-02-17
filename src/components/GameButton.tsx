@@ -11,7 +11,7 @@ interface IGameButton {
 
 function GameButton({ clickFunction, text, buttonType }: IGameButton) {
   return (
-    <button onClick={clickFunction} className={buttonType}>
+    <button onClick={clickFunction} className={`text-black ${buttonType}`}>
       {text}
     </button>
   );

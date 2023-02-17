@@ -17,7 +17,7 @@ function GameLetterBoxes({
             key={`${letter}_${index}`}
             className={`${
               isWrongAnswer && "border-2 border-red-500"
-            } w-[30px] h-[60px] rounded-md bg-gray-300 flex items-center justify-center text-xl font-bold`}
+            } w-[25px] h-[50px] rounded-md text-black bg-gray-300 flex items-center justify-center text-xl font-bold`}
           >
             {wordInput[index]}
           </div>
